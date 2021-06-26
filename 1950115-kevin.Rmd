@@ -55,6 +55,7 @@ dim(datost)
 
 cortest.bartlett(r, n= 30)
 ```
+## MEDIDAS DE ADECUACION MUESTRAL DE KAYSER, MEYER Y OKLIN (KMO)
 
 
 
