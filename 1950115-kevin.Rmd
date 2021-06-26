@@ -1,0 +1,49 @@
+---
+title: "EXAMEN FINAL ANALISIS FACTORIAL"
+Nombre: "KEVIN MOJICA"
+Codigo: "1950115"
+output: github_document
+---
+```{r}
+library(readxl)
+datos<- read_excel("C:/Users/MUNDOJP/Desktop/PREVIO III DISEÑO DE EXPERIMENTOS/base de datos kevin.xlsx")
+
+```
+
+## TIPIFICACION O ESTANDARIZACION DE VARIABLES
+
+```{r}
+datost<- datos
+
+datos<- scale(datost, center = T, scale = T)
+datost<- as.data.frame(datost)
+```
+
+## NORMALIDAD MULTIVARIANTE
+
+H0: Normalidad multivariante 
+H1: No normalidad multivariante 
+Confianza= 95%
+Alfa= 5% = 0,05
+P value > alfa: no se rechaza la H0 (Normalidad) 
+P value < alfa: se rechaza la H0 (No normalidad)
+```{r}
+library(MVN)
+mvn(datost[2:7])
+```
+
+## MATRIZ DE CORRELACIONES 
+
+```{r}
+library(psych)
+corr.test(datost[,2:7])
+correlaciones<- corr.test(datost[,2:7])
+correlaciones$r
+r<- as.matrix(correlaciones$r)
+
+```
+
+
+
+
+
