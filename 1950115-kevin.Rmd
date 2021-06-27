@@ -56,6 +56,85 @@ dim(datost)
 cortest.bartlett(r, n= 30)
 ```
 ## MEDIDAS DE ADECUACION MUESTRAL DE KAYSER, MEYER Y OKLIN (KMO)
+```{r}
+KMO(r)
+```
+##METODOS DE EXTRACCION DE FACTORES 
+##METODO DE LOS ANALISIS DE LOS COMPONENTES (ACP)
+
+```{r}
+library(psych)
+acp<-principal(r, nfactors = 1, rotate = "none")
+
+acp 
+```
+
+## METODOS DE LOS EJES PRINCIPALES (CPI)
+```{r}
+cpi<- fa(r, nfactors = 2, fm= "pa", rotate = "none", n.obs = 30)
+cpi
+```
+
+## METODO DE MAXIMA VEROSIMILITUD (MVE)
+```{r}
+mve<- fa(r, nfactors = 1, fm= "ml", rotate = "none", n.obs = 30)
+mve
+```
+
+## REPRESENTACION GRAFICA DE LOS FACTORES EXTRAIDOS
+## ACP
+## CPI
+## MVE
+
+# Solo se grafica cuando hay 2 factores a extraer, por lo cual no se puede hacer ya que solo se extrajo 1
+
+plot(acp,labels =row.names(r),cex =.7 , ylim=c(-.8,.8))	
+```
+
+plot(cpi,labels=row.names(r), cex=.7, ylim=c(-.8,.8))
+```
+
+plot(mve,labels = row.names(r), cex=1, ylim=c(-.8, .8))
+```
+# OBTENCION DE LAS PUNTUACIONES FACTORIALES
+## MEOTODOS DE LOS ANALISIS DE LOS COMPONENTES PRINCIPALES ITERADAS (ACP)
+
+```{r}
+acp1 <-principal(datost[,2:7], nfactors = 1 , rotate = "none", scores = T)
+acp1$scores
+puntuacionesfactoriales_acp<- acp1$scores
+puntuacionesfactoriales_acp<- as.data.frame(puntuacionesfactoriales_acp)
+
+```
+
+## METODO DE LAS COMPONENTES INTEGRADAS (CPI)  
+```{r}
+cpi1<- fa(datost[,2:7], nfactors = 1, fm= "pa", rotate = "none", n.obs = 30, scores = "regression")
+cpi1$scores
+puntfact_cp1<-cpi1$scores
+puntfact_cp1<-as.data.frame(puntfact_cp1)
+
+```
+
+## METODO DE LA MAXIMA VIROSIMILITUD
+```{r}
+mve1<- fa(datost[,2:7], nfactors = 1, fm= "ml", rotate = "none", n.obs = 30, scores = "regression")
+mve1$scores
+puntfact_mve1<-mve1$scores
+puntfact_mve1<-as.data.frame(puntfact_mve1)
+```
+# OBTENCION DE LOS DATOS EXTRAIDOS
+```{r}
+factor.scores(r, acp, method = "thurstone")
+```
+
+## AGREGAR EL FACTOR EXTRAIDO (PUNTUACIONES FACTORIALES) A UN DATA FRAMA
+```{r}
+datos_puntuaciones<- c(datos, puntuacionesfactoriales_acp)
+datos_puntuaciones<- c(datos, puntuacionesfactoriales_acp)
+```
+
+
 
 
 
